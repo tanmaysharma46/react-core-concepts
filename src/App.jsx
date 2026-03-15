@@ -2,7 +2,7 @@
 import './App.css'
 import Counter from './assets/counter'
 import Batsman from './assets/Batsman'
-
+import Users from './users'
 function App() {
   function HandleClick() {
     alert("I am clicked.")
@@ -21,6 +21,10 @@ function App() {
 
 
     <>
+
+
+      <Users></Users>
+
     <Counter></Counter>
       <h1>Vite+React </h1>
       <Batsman></Batsman>
