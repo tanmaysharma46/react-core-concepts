@@ -192,3 +192,15 @@
    border-radius: 5px;
    margin-top: 5px;
 }
+
+
+.card{
+  border: 2px solid gold;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 20px;
+}
+.fontBold{
+  font-weight: bold;
+}
+

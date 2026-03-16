@@ -3,7 +3,24 @@ import './App.css'
 import Counter from './assets/counter'
 import Batsman from './assets/Batsman'
 import Users from './users'
+import { Suspense } from 'react'
+import Friends from './friends'
+
+
+const fetchUsers = 
+fetch('https://jsonplaceholder.typicode.com/users').then(res => res.json())
+
+const fetchFriends=async()=>{
+  const res =await fetch('https://jsonplaceholder.typicode.com/users');
+  return res.json();
+}
+
+
 function App() {
+
+  const friendPromise=fetchFriends();
+
+
   function HandleClick() {
     alert("I am clicked.")
   }
@@ -12,8 +29,8 @@ function App() {
     alert('clicked button 3 ')
 
   }
-  const handleAdd5=(num)=>{
-    const newNum=(num)+5;
+  const handleAdd5 = (num) => {
+    const newNum = (num) + 5;
     alert(newNum);
   }
 
@@ -23,9 +40,17 @@ function App() {
     <>
 
 
-      <Users></Users>
 
-    <Counter></Counter>
+      <Suspense fallback={<h3>loading ...</h3>}>
+    <Friends friendPromise={friendPromise}>  </Friends>
+
+      </Suspense>
+
+      <Suspense fallback={<h3>Friends are coming for treat ...</h3>}>
+        <Users fetchUsers={fetchUsers} ></Users>
+
+      </Suspense>
+      <Counter></Counter>
       <h1>Vite+React </h1>
       <Batsman></Batsman>
       {/* <button onClick="handleClick()">Click Me </button> */}
@@ -35,10 +60,10 @@ function App() {
       }}>Click me 2 </button>
 
       <button onClick={handleClick3}>click 3 </button>
-      <button onCanPlay={()=>alert('click 4')}>click 4 </button>
-    
+      <button onCanPlay={() => alert('click 4')}>click 4 </button>
 
-    {/* <button onMouseEnter={()=>handleAdd5(8)}>Click add 5</button> */}
+
+      {/* <button onMouseEnter={()=>handleAdd5(8)}>Click add 5</button> */}
 
     </>
   )
